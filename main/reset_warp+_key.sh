@@ -2,6 +2,7 @@
 
 clear
 echo "🔑 Reseting WARP+ key..."
+sleep 1
 
 reset_key() {
     read -p "🗝 Enter your WARP+ key: " key
