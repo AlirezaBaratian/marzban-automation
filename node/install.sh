@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-clear
-echo "Installing Mazrban-node on /opt/"
-sleep 2
-
 install() {
     # Install dependencies
     sudo apt install socat -y && apt install curl socat -y && apt install git -y
@@ -41,4 +37,12 @@ check_os() {
     fi
 }
 
-check_os
+function main() {
+    clear
+    echo "Installing Mazrban-node on /opt/"
+    sleep 2
+
+    check_os
+}
+
+main
