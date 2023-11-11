@@ -8,7 +8,7 @@ main() {
     read -p "🗝 Enter your WARP+ key: " key
     read -p "🎬 Enter wgcf configs directory: " dir
 
-    old_pattern="license_key = '"
+    old_pattern="license_key ="
     new_line="license_key = '$key'"
     config_file="$dir/wgcf-account.toml"
 
