@@ -4,7 +4,7 @@ clear
 echo "🔑 Reseting WARP+ key..."
 sleep 1
 
-reset_key() {
+main() {
     read -p "🗝 Enter your WARP+ key: " key
     read -p "🎬 Enter wgcf configs directory: " dir
 
@@ -23,13 +23,12 @@ reset_key() {
     secret_key=$(grep "$search_pattern" "$config_file") | cut -d= -f2 | cut -d" " -f2
 
     old_pattern="\"secretKey\": "
-    new_line="\"secretKey\": \"$secret_key\""
+    new_line="\"secretKey\": $secret_key"
     config_file="/var/lib/marzban/xray_config.json"
 
     sed -i "s/$old_pattern/$new_line/" "$config_file"
 
     marzban restart
-
 }
 
-reset_key
+main
