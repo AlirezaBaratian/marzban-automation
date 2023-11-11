@@ -1,3 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-bash <(curl -Ls https://github.com/AC-Lover/backup/raw/main/backup.sh)
+function main() {
+    bash <(curl -Ls https://github.com/AC-Lover/backup/raw/main/backup.sh)
+}
+
+main
