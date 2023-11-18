@@ -9,7 +9,7 @@ function main() {
     apt install -y wget unzip
 
     # Downlaod and setup Xray core inside marzban data directory
-    download_url="https://github.com/XTLS/Xray-core/releases/download/v1.8.6/Xray-linux-64.zip"
+    download_url="https://github.com/XTLS/Xray-core/releases/download/v1.8.4/Xray-linux-64.zip"
     xray_path="/var/lib/marzban/xray-core"
 
     mkdir -p "$xray_path" && cd "$xray_path"
