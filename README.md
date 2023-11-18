@@ -1,4 +1,4 @@
-# marzban-scripts
+# marzban-automation
 
 A collection of scripts for automating Marzban maintainance
 
