@@ -11,7 +11,7 @@ Press enter and ctrl+d when cert content is pasted."
 
     ssl_cert="${ssl_cert%$'\n'}"
 
-    return $ssl_cert
+    echo "$ssl_cert"
 }
 
 install() {
