@@ -14,7 +14,7 @@ Press enter and ctrl+d when cert content is pasted."
     return $ssl_cert
 }
 
-install(cert) {
+install() {
     # Install dependencies
     sudo apt install socat -y && apt install curl socat -y && apt install git -y
 
@@ -26,7 +26,8 @@ install(cert) {
     sudo curl -fsSL https://get.docker.com | sh
 
     # Write ssl_cert_client into a file
-    cert_file="/var/lib/marzban-node/ssl_client_cert.pem"
+    local cert_file="/var/lib/marzban-node/ssl_client_cert.pem"
+    local cert=$1
     echo "$cert" > "$cert_file"
     chmod 644 "$cert_file"
 
