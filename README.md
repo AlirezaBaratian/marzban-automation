@@ -2,7 +2,7 @@
 
 A collection of scripts for automating Marzban maintainance
 
-## Project Structure
+## Guide
 
 - main: scripts for main panel server
 - node: scripts for node
