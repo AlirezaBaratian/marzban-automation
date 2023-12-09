@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-function get_warp_key() {
-    raed -p "Enter your WARP+ key: " warp_key
-}
-
 install_dependencies() {
     apt update
     apt install -y wget 
@@ -23,23 +19,31 @@ install_wgcf() {
     ln -s /opt/wgcf/wgcf /usr/bin/
 }
 
-register_wgcf() {
+setup_wgcf() {
     echo -e "\n" | wgcf register
     sleep 5
-    sed -i "s/license_key/license_key = '$warp_key'/" wgcf-account.toml
+    account_config="wgcf-account.toml"
+    raed -p "Enter your WARP+ key: " warp_key
+    sed -i "/license_key/c\license_key = '$warp_key'" $account_config
     wgcf update
     sleep 3
     wgcf generate
     sleep 3
-    
+}
+
+update_xray_config() {
+    account_profile="wgcf-profile.toml"
+    private_key=$(cat $account_profile | grep "PrivateKey = " | awk ' {print $3} ')
+    xray_config="/var/lib/marzban/xray_config.json"
+    jq --arg private_key "$private_key" '.outbounds[1].settings.secretKey = $private_key' $xray_config > $xray_config
+    marzban restart
 }
 
 function main() {
     get_warp_key
     install_dependencies
     install_wgcf
-    register_wgcf
-    change_warp_key
+    setup_wgcf
     update_xray_config
 }
 
