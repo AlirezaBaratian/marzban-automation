@@ -44,7 +44,6 @@ function main() {
     install_dependencies
     install_wgcf
     setup_wgcf
-    update_xray_config
 }
 
 main
