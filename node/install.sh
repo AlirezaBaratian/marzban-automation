@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 function get_cert() {
+    # Get multiline input for cert
     ssl_cert=""
 
     while IFS= read -r line; do
@@ -14,14 +15,17 @@ function get_cert() {
 
 install() {
     # Install dependencies
-    sudo apt install socat -y && apt install curl socat -y && apt install git -y
-
-    # Clone the repo on /opt and get there
-    sudo git clone https://github.com/Gozargah/Marzban-node /opt/Marzban-node
-    cd /opt/Marzban-node
+    apt-get update; apt-get upgrade -y; apt-get install curl socat git -y
 
     # Install docker
     sudo curl -fsSL https://get.docker.com | sh
+
+    # Clone the repo on /opt and get there
+    repo_name="Marzban-node"
+    mkdir -p /var/lib/$repo_name
+    mkdir -p /opt/$repo_name
+    cd /opt/$repo_name
+    git clone https://github.com/Gozargah/$repo_name
 
     # Write ssl_cert_client into a file
     local cert_file="/var/lib/marzban-node/ssl_client_cert.pem"
@@ -29,10 +33,8 @@ install() {
     echo "$cert" > "$cert_file"
     chmod 644 "$cert_file"
 
-    # Run Marzban-node
+    # Run
     sudo docker compose up -d
-
-    # View the node cert
 
 }
 
@@ -41,7 +43,6 @@ check_os() {
         . /etc/os-release
         if [ "$ID" == "debian" ] || [ "$ID_LIKE" == "debian" ]; then
             echo "The operating system is Debian-based."
-            sleep 2
             install
         else
             echo "The operating system is not Debian-based."
