@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 function get_cert() {
+    echo "Enter your cert from Marzban panel and finaly press ctrl+d: "
+    
     # Get multiline input for cert
     ssl_cert=""
 
